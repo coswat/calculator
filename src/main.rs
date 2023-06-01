@@ -98,7 +98,14 @@ fn calculate_number(opr: &str, first: i32, second: i32) {
         // Multiplication operatiom
         "*" => println!("Multiplication {} * {} = {}", first, second, first * second),
         // Division operatiom
-        "/" => println!("Division {} / {} = {}", first, second, first / second),
+        "/" => {
+            // check the second number is 0
+            if second == 0 {
+                println!("{}Number cant be divisble by 0{}", "\x1b[31m", "\x1b[0m");
+                return;
+            }
+            println!("Division {} / {} = {}", first, second, first / second);
+        }
         // Handle th error for invalid operater
         _ => {
             println!(
