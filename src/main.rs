@@ -24,18 +24,16 @@
  * Author: coswat
  * Date: 2023-06-02
  */
-
 use std::io;
 
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
     println!("Welcome to simple DMAS Calculater");
     runCalculater();
-
 }
 /// Runs the calculator by taking user input for numbers and operator.
 fn runCalculater() {
-      println!("Enter First Number :");
+    println!("Enter First Number :");
     let mut first: String = String::new();
     let mut second: String = String::new();
     let mut opr: String = String::new();
@@ -80,14 +78,14 @@ fn runCalculater() {
 /// Calculates the result based on the operator and prints it.
 /// Supports addition (+), subtraction (-), multiplication (*), and division (/).
 fn calculateNumber(opr: &str, first: i32, second: i32) {
-   match opr.trim() {
-     "+" => println!("Addition {} + {} = {}",first, second, first + second),
-     "-" => println!("Substraction {} - {} = {}", first, second, first - second),
-     "*" => println!("Multiplication {} * {} = {}",first, second, first * second),
-     "/" => println!("Division {} / {} = {}", first, second, first / second),
-      _ => {
-       println!("Invalid operater {} , supported [/, *, +, -]",opr);
-       return;
-     }
-   };
+    match opr.trim() {
+        "+" => println!("Addition {} + {} = {}", first, second, first + second),
+        "-" => println!("Substraction {} - {} = {}", first, second, first - second),
+        "*" => println!("Multiplication {} * {} = {}", first, second, first * second),
+        "/" => println!("Division {} / {} = {}", first, second, first / second),
+        _ => {
+            println!("Invalid operater {} , supported [/, *, +, -]", opr);
+            return;
+        }
+    };
 }
