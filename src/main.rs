@@ -79,10 +79,15 @@ fn runCalculater() {
 /// Supports addition (+), subtraction (-), multiplication (*), and division (/).
 fn calculateNumber(opr: &str, first: i32, second: i32) {
     match opr.trim() {
+        // Addition operatiom
         "+" => println!("Addition {} + {} = {}", first, second, first + second),
+        // Substraction operatiom
         "-" => println!("Substraction {} - {} = {}", first, second, first - second),
+        // Multiplication operatiom
         "*" => println!("Multiplication {} * {} = {}", first, second, first * second),
+        // Division operatiom
         "/" => println!("Division {} / {} = {}", first, second, first / second),
+        // Handle th error for invalid operater
         _ => {
             println!("Invalid operater {} , supported [/, *, +, -]", opr);
             return;
