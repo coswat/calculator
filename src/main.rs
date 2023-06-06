@@ -28,7 +28,9 @@ use std::io;
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
     println!("Welcome to simple DMAS Calculater");
+    // collect the args
     let args: Vec<String> = args().collect();
+    // if the caclculation through args , proccess goes here
     if args.len() > 3 {
         let ans: f32 = calculate_number(
             &args[2],
@@ -38,6 +40,7 @@ fn main() {
         println!("{} {} {} = {}", args[1], args[2], args[3], ans);
         return;
     }
+    // else run normal calculator
     run_calculater();
 }
 /// Runs the calculator by taking user input for numbers and operator.
