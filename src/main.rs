@@ -1,4 +1,6 @@
 use std::env::args;
+use std::io;
+
 /**
  * Simple DMAS Calculator
  *
@@ -22,7 +24,6 @@ use std::env::args;
  * Author: coswat
  * Date: 2023-06-02
  */
-use std::io;
 
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
