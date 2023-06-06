@@ -1,5 +1,3 @@
-#![allow(unused)]
-
 /**
  * Simple DMAS Calculator
  *
@@ -36,7 +34,9 @@ fn run_calculater() {
     let mut first: String = String::new();
     let mut second: String = String::new();
     let mut opr: String = String::new();
-    io::stdin().read_line(&mut first);
+    io::stdin()
+        .read_line(&mut first)
+        .expect("unable to read line");
     // Parse the first number
     let first: f32 = match first.trim().parse() {
         Ok(num) => num,
@@ -49,7 +49,9 @@ fn run_calculater() {
         }
     };
     println!("{}Enter Second Number :{}", "\x1b[32m", "\x1b[0m");
-    io::stdin().read_line(&mut second);
+    io::stdin()
+        .read_line(&mut second)
+        .expect("unable to read line");
     // Parse the second number
     let second: f32 = match second.trim().parse() {
         Ok(num) => num,
@@ -65,7 +67,9 @@ fn run_calculater() {
         "{}Calculation operater : [/, *, +, -]{}",
         "\x1b[32m", "\x1b[0m"
     );
-    io::stdin().read_line(&mut opr);
+    io::stdin()
+        .read_line(&mut opr)
+        .expect("unable to read line");
     // Check the validity of numbers and perform the calculation
     if first > f32::MAX {
         println!(
