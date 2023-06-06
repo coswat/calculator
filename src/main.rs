@@ -1,3 +1,4 @@
+use std::env::args;
 /**
  * Simple DMAS Calculator
  *
@@ -26,6 +27,16 @@ use std::io;
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
     println!("Welcome to simple DMAS Calculater");
+    let args: Vec<String> = args().collect();
+    if args.len() > 3 {
+        let ans: f32 = calculate_number(
+            &args[2],
+            args[1].trim().parse().unwrap(),
+            args[3].trim().parse().unwrap(),
+        );
+        println!("{} {} {} = {}", args[1], args[2], args[3], ans);
+        return;
+    }
     run_calculater();
 }
 /// Runs the calculator by taking user input for numbers and operator.
