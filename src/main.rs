@@ -27,7 +27,6 @@ use std::io;
 
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
-    println!("Welcome to simple DMAS Calculater");
     // collect the args
     let args: Vec<String> = args().collect();
     // if the caclculation through args , proccess goes here
@@ -40,6 +39,7 @@ fn main() {
         println!("{} {} {} = {}", args[1], args[2], args[3], ans);
         return;
     }
+    println!("Welcome to simple DMAS Calculater");
     // else run normal calculator
     run_calculater();
 }
