@@ -1,5 +1,6 @@
 use std::env::args;
 use std::io;
+use colored::*;
 
 /**
  * Simple DMAS Calculator
@@ -45,7 +46,7 @@ fn main() {
 }
 /// Runs the calculator by taking user input for numbers and operator.
 fn run_calculater() {
-    println!("{}Enter First Number :{}", "\x1b[32m", "\x1b[0m");
+    println!("{}","Enter First Number :".green());
     let mut first: String = String::new();
     let mut second: String = String::new();
     let mut opr: String = String::new();
@@ -57,13 +58,13 @@ fn run_calculater() {
         Ok(num) => num,
         Err(_) => {
             println!(
-                "{}First number should be a valid number{}",
-                "\x1b[31m", "\x1b[0m"
+                "{}",
+                "First number should be a valid number".red()
             );
             return;
         }
     };
-    println!("{}Enter Second Number :{}", "\x1b[32m", "\x1b[0m");
+    println!("{}", "Enter Second Number :".green());
     io::stdin()
         .read_line(&mut second)
         .expect("unable to read line");
@@ -72,19 +73,20 @@ fn run_calculater() {
         Ok(num) => num,
         Err(_) => {
             println!(
-                "{}Second number should be a valid number{}",
-                "\x1b[31m", "\x1b[0m"
+                "{}",
+                "Second number should be a valid number".red()
             );
             return;
         }
     };
     println!(
-        "{}Calculation operater : [/, *, +, -]{}",
-        "\x1b[32m", "\x1b[0m"
+        "{}",
+        "Calculation operater : [/, *, +, -]".green()
     );
     io::stdin()
         .read_line(&mut opr)
         .expect("unable to read line");
+
     // Check the validity of numbers and perform the calculation
     if first > f32::MAX {
         println!(
