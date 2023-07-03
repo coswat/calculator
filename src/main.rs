@@ -1,6 +1,6 @@
-use std::env::args;
-use std::io;
 use colored::*;
+use std::env;
+use std::io;
 
 /**
  * Simple DMAS Calculator
@@ -29,9 +29,9 @@ use colored::*;
 /// Main function that prints a welcome message and runs the calculator.
 fn main() {
     // collect the args
-    let args: Vec<String> = args().collect();
+    let args: Vec<String> = env::args().collect();
     // if the caclculation through args , proccess goes here
-    if args.len() > 3 {
+    if env::args().len() > 3 {
         let ans: f32 = calculate_number(
             &args[2],
             args[1].trim().parse().unwrap(),
@@ -46,7 +46,7 @@ fn main() {
 }
 /// Runs the calculator by taking user input for numbers and operator.
 fn run_calculater() {
-    println!("{}","Enter First Number :".green());
+    println!("{}", "Enter First Number :".green());
     let mut first: String = String::new();
     let mut second: String = String::new();
     let mut opr: String = String::new();
@@ -57,10 +57,7 @@ fn run_calculater() {
     let first: f32 = match first.trim().parse() {
         Ok(num) => num,
         Err(_) => {
-            println!(
-                "{}",
-                "First number should be a valid number".red()
-            );
+            println!("{}", "First number should be a valid number".red());
             return;
         }
     };
@@ -72,17 +69,11 @@ fn run_calculater() {
     let second: f32 = match second.trim().parse() {
         Ok(num) => num,
         Err(_) => {
-            println!(
-                "{}",
-                "Second number should be a valid number".red()
-            );
+            println!("{}", "Second number should be a valid number".red());
             return;
         }
     };
-    println!(
-        "{}",
-        "Calculation operater : [/, *, +, -]".green()
-    );
+    println!("{}", "Calculation operater : [/, *, +, -]".green());
     io::stdin()
         .read_line(&mut opr)
         .expect("unable to read line");
@@ -128,6 +119,9 @@ fn calculate_number(opr: &str, first: f32, second: f32) -> f32 {
             first / second
         }
         // Handle th error for invalid operater*/
-        _ => return 0.0,
+        _ => {
+            println!("{}", "Invalid Operater".red());
+            0.0
+        }
     }
 }
