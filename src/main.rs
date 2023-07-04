@@ -32,13 +32,20 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     // if the caclculation through args , proccess goes here
     if env::args().len() > 3 {
-        let ans: f32 = calculate_number(
+        match calculate_number(
             &args[2],
             args[1].trim().parse().unwrap(),
             args[3].trim().parse().unwrap(),
-        );
-        println!("{} {} {} = {}", args[1], args[2], args[3], ans);
-        return;
+        ) {
+            Ok(ans) => {
+                println!("{}", ans);
+                return;
+            }
+            Err(err) => {
+                println!("{}", err.red());
+                return;
+            }
+        }
     }
     println!("Welcome to simple DMAS Calculater");
     // else run normal calculator
@@ -78,50 +85,30 @@ fn run_calculater() {
         .read_line(&mut opr)
         .expect("unable to read line");
 
-    // Check the validity of numbers and perform the calculation
-    if first > f32::MAX {
-        println!(
-            "{}First number must be between 1 - {} , {} given{}",
-            "\x1b[31m",
-            f32::MAX,
-            first,
-            "\x1b[0m"
-        );
-    } else if second > f32::MAX {
-        println!(
-            "{}Second number must be between 1 - {} , {} given{}",
-            "\x1b[31m",
-            f32::MAX,
-            second,
-            "\x1b[0m"
-        );
-    } else {
-        let ans: f32 = calculate_number(&opr, first, second);
-        println!("{} {} {} = {}", first, opr, second, ans);
+    match calculate_number(&opr, first, second) {
+        Ok(ans) => println!("{}", ans),
+        Err(err) => println!("{}", err.red()),
     }
 }
 /// Calculates the result based on the operator and prints it.
 /// Supports addition (+), subtraction (-), multiplication (*), and division (/).
-fn calculate_number(opr: &str, first: f32, second: f32) -> f32 {
+fn calculate_number(opr: &str, first: f32, second: f32) -> Result<f32, String> {
     match opr.trim() {
         // Addition operatiom
-        "+" => first + second,
+        "+" => Ok(first + second),
         // Substraction operatiom
-        "-" => first - second,
+        "-" => Ok(first - second),
         // Multiplication operatiom
-        "*" => first * second,
+        "*" => Ok(first * second),
         // Division operatiom
         "/" => {
             // check the second number is 0
             if second == 0.0 {
-                return 0.0;
+                return Err(String::from("Number cannot divisible by 0"));
             }
-            first / second
+            Ok(first / second)
         }
         // Handle th error for invalid operater*/
-        _ => {
-            println!("{}", "Invalid Operater".red());
-            0.0
-        }
+        _ => Err(String::from("Invalid Operater")),
     }
 }
