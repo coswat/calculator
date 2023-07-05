@@ -92,7 +92,7 @@ fn run_calculater() {
 }
 /// Calculates the result based on the operator and prints it.
 /// Supports addition (+), subtraction (-), multiplication (*), and division (/).
-fn calculate_number(opr: &str, first: f32, second: f32) -> Result<f32, String> {
+fn calculate_number(opr: &str, first: f32, second: f32) -> Result<f32, &str> {
     match opr.trim() {
         // Addition operatiom
         "+" => Ok(first + second),
@@ -104,12 +104,12 @@ fn calculate_number(opr: &str, first: f32, second: f32) -> Result<f32, String> {
         "/" => {
             // check the second number is 0
             if second == 0.0 {
-                return Err(String::from("Number cannot divisible by 0"));
+                return Err("Number cannot divisible by 0");
             }
             Ok(first / second)
         }
         // Handle th error for invalid operater*/
-        _ => Err(String::from("Invalid Operater")),
+        _ => Err("Invalid Operater"),
     }
 }
 
@@ -130,7 +130,7 @@ mod tests {
         let second: f32 = 15.0;
         assert_eq!(
             calculate_number(opr, first, second),
-            Err("Invalid Operater".to_string())
+            Err("Invalid Operater")
         );
     }
     #[test]
@@ -140,7 +140,7 @@ mod tests {
         let second: f32 = 0.0;
         assert_eq!(
             calculate_number(opr, first, second),
-            Err("Number cannot divisible by 0".to_string())
+            Err("Number cannot divisible by 0")
         );
     }
 }
