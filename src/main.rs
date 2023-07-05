@@ -3,27 +3,27 @@ use std::env;
 use std::io;
 
 /**
- * Simple DMAS Calculator
- *
- * This program allows the user to perform basic arithmetic calculations using two numbers.
- * The supported operations are addition (+), subtraction (-), multiplication (*), and division (/).
- * The user is prompted to enter the first and second numbers, as well as the operator.
- * The program then performs the calculation and displays the result.
- *
- * Example usage:
- * ```
- * Welcome to simple DMAS Calculator
- * Enter First Number:
- * 10
- * Enter Second Number:
- * 5
- * Calculation operator: [/, *, +, -]
- * *
- * Multiplication 10 * 5 = 50
- * ```
- *
- * Author: coswat
- * Date: 2023-06-02
+/// Simple DMAS Calculator
+///
+/// This program allows the user to perform basic arithmetic calculations using two numbers.
+/// The supported operations are addition (+), subtraction (-), multiplication (*), and division (/).
+/// The user is prompted to enter the first and second numbers, as well as the operator.
+/// The program then performs the calculation and displays the result.
+///
+/// Example usage:
+/// ```
+/// Welcome to simple DMAS Calculator
+/// Enter First Number:
+/// 10
+/// Enter Second Number:
+/// 5
+/// Calculation operator: [/, *, +, -]
+///
+/// Multiplication 10 * 5 = 50
+/// ```
+///
+/// Author: coswat
+/// Date: 2023-06-02
  */
 
 /// Main function that prints a welcome message and runs the calculator.
@@ -110,5 +110,37 @@ fn calculate_number(opr: &str, first: f32, second: f32) -> Result<f32, String> {
         }
         // Handle th error for invalid operater*/
         _ => Err(String::from("Invalid Operater")),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    #[test]
+    fn test_calculate_number() {
+        let opr: &str = "+";
+        let first: f32 = 10.0;
+        let second: f32 = 15.0;
+        assert_eq!(calculate_number(opr, first, second), Ok(25.0));
+    }
+    #[test]
+    fn test_invalid_operater_err() {
+        let opr: &str = "invalid";
+        let first: f32 = 10.0;
+        let second: f32 = 15.0;
+        assert_eq!(
+            calculate_number(opr, first, second),
+            Err("Invalid Operater".to_string())
+        );
+    }
+    #[test]
+    fn test_number_not_divisible_by_zero() {
+        let opr: &str = "/";
+        let first: f32 = 170.0;
+        let second: f32 = 0.0;
+        assert_eq!(
+            calculate_number(opr, first, second),
+            Err("Number cannot divisible by 0".to_string())
+        );
     }
 }
