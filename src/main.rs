@@ -1,6 +1,7 @@
 use colored::*;
 use std::env;
 use std::io;
+use std::process;
 
 /**
 /// Simple DMAS Calculator
@@ -39,11 +40,11 @@ fn main() {
         ) {
             Ok(ans) => {
                 println!("{}", ans);
-                return;
+                process::exit(0);
             }
             Err(err) => {
                 println!("{}", err.red());
-                return;
+                process::exit(1);
             }
         }
     }
@@ -65,7 +66,7 @@ fn run_calculater() {
         Ok(num) => num,
         Err(_) => {
             println!("{}", "First number should be a valid number".red());
-            return;
+            process::exit(1);
         }
     };
     println!("{}", "Enter Second Number :".green());
@@ -77,7 +78,7 @@ fn run_calculater() {
         Ok(num) => num,
         Err(_) => {
             println!("{}", "Second number should be a valid number".red());
-            return;
+            process::exit(1);
         }
     };
     println!("{}", "Calculation operater : [/, *, +, -]".green());
@@ -86,8 +87,14 @@ fn run_calculater() {
         .expect("unable to read line");
 
     match calculate_number(&opr, first, second) {
-        Ok(ans) => println!("{}", ans),
-        Err(err) => println!("{}", err.red()),
+        Ok(ans) => {
+            println!("{}", ans);
+            process::exit(0);
+        }
+        Err(err) => {
+            println!("{}", err.red());
+            process::exit(1);
+        }
     }
 }
 /// Calculates the result based on the operator and prints it.
