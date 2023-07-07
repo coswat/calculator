@@ -62,25 +62,20 @@ fn run_calculater() {
         .read_line(&mut first)
         .expect("unable to read line");
     // Parse the first number
-    let first: f32 = match first.trim().parse() {
-        Ok(num) => num,
-        Err(_) => {
-            println!("{}", "First number should be a valid number".red());
-            process::exit(1);
-        }
-    };
+    let first: f32 = first.trim().parse().unwrap_or_else(|_err| {
+        eprintln!("{}", "First number should be a valid number".red());
+        process::exit(1);
+    });
+
     println!("{}", "Enter Second Number :".green());
     io::stdin()
         .read_line(&mut second)
         .expect("unable to read line");
     // Parse the second number
-    let second: f32 = match second.trim().parse() {
-        Ok(num) => num,
-        Err(_) => {
-            println!("{}", "Second number should be a valid number".red());
-            process::exit(1);
-        }
-    };
+    let second: f32 = second.trim().parse().unwrap_or_else(|_err| {
+        eprintln!("{}", "Second number should be a valid number".red());
+        process::exit(1);
+    });
     println!("{}", "Calculation operater : [/, *, +, -]".green());
     io::stdin()
         .read_line(&mut opr)
@@ -92,7 +87,7 @@ fn run_calculater() {
             process::exit(0);
         }
         Err(err) => {
-            println!("{}", err.red());
+            eprintln!("{}", err.red());
             process::exit(1);
         }
     }
